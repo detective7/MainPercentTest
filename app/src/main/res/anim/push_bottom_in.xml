@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 上下滑入式 -->
+
+ <!--   <translate
+        android:toXDelta="0"
+        android:fromXDelta="100%"
+        android:duration="350"
+        android:fromYDelta="100%"
+        android:toYDelta="0" />-->
+
+    <translate
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:duration="800"
+        android:fromYDelta="100%p"
+       />
+
+    <!--<translate-->
+        <!--android:duration="2000"-->
+        <!--android:fromXDelta="100%p"-->
+        <!--android:toXDelta="0" />-->
+
+    <!--<pk_tvcancel_alpha-->
+        <!--android:duration="200"-->
+        <!--android:fromAlpha="0.0"-->
+        <!--android:toAlpha="1.0" />-->

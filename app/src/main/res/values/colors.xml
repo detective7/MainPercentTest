@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black_dark_light">#080808</color>
+    <color name="black_dark">#060004</color>
+    <color name="black">#000000</color>
+    <color name="yellow_light">#FFCA3B</color>
+    <color name="yellow">#ffca3c</color>
+    <color name="yellow_alpha">#33ffca3c</color>
+    <color name="yellow_medium">#FFF9B500</color>
+    <color name="khaki">#FEAF03</color>
+    <color name="yellow_dark">#FFAF00</color>
+    <color name="yellow_night">#F6BD26</color>
+    <color name="khaki_dark">#C38E00</color>
+    <color name="background">#F9F9F9</color>
+
+    <color name="red_light">#F67057</color>
+    <color name="red_dark">#F67057</color>
+    <color name="red">#F85738</color>
+    <color name="rosy_brown">#FF4081</color>
+    <color name="crimson">#d9422f</color>
+    <color name="red_medium">#a25f0b</color>
+
+    <color name="blue_light">#448bd4</color>
+    <color name="sky_blue">#31aaff</color>
+    <color name="royal_blue">#3F51B5</color>
+    <color name="blue_medium">#303F9F</color>
+    <color name="blue_dark">#1E5897</color>
+    <color name="green_light">#488A0C</color>
+    <color name="green_dark">#4E9A05</color>
+    <color name="white">#FFFFFF</color>
+    <color name="pk_current_text_bg">#9a3442</color>
+
+
+    <color name="snow">#F3F3F3</color>
+    <color name="snow_light">#f4f4f4</color>
+    <color name="snow_medium">#EEEEEE</color>
+    <color name="snow_dark">#EBEBEB</color>
+    <color name="ivory">#F1F1F1</color>
+    <color name="ivory_light">#EAEAEA</color>
+    <color name="ivory_medium">#E7E7E7</color>
+    <color name="ivory_dark">#E3E3E3</color>
+    <color name="white_smoke_light">#D7D7D7</color>
+    <color name="white_smoke">#CCCCCC</color>
+    <color name="white_smoke_dark">#CBCBCB</color>
+    <color name="white_smoke_medium">#c8c8c8</color>
+
+    <color name="white_snow">#ECECEC</color>
+    <color name="white_snow_light">#E7E8E8</color>
+
+    <color name="gray_light">#BBBBBB</color>
+    <color name="gray">#888888</color>
+    <color name="gray_dark">#848484</color>
+    <color name="gray_medium">#444444</color>
+    <color name="gray_medium_alpha">#4CA8A8A8</color>
+    <color name="black_gray">#333333</color>
+    <color name="black_gray_dark">#787878</color>
+    <color name="white_ripple_bg">#858585</color>
+    <color name="white_sl_bg">#4cffffff</color>
+
+    <!--公共的颜色-->
+    <color name="base_layout_bg">#f1f1f1</color>
+
+
+
+    <!--sweet dialog-->
+    <color name="float_transparent">#00000000</color>
+    <color name="gray_btn_bg_color">#D0D0D0</color>
+    <color name="gray_btn_bg_pressed_color">#B6B6B6</color>
+    <color name="blue_btn_bg_color">#AEDEF4</color>
+    <color name="blue_btn_bg_pressed_color">#96BFD2</color>
+    <color name="red_btn_bg_color">#DD6B55</color>
+    <color name="red_btn_bg_pressed_color">#CD5B55</color>
+    <color name="error_stroke_color">#F27474</color>
+    <color name="success_stroke_color">#A5DC86</color>
+    <color name="trans_success_stroke_color">#33A5DC86</color>
+    <color name="warning_stroke_color">#F8BB86</color>
+    <color name="material_blue_grey_80">#ff37474f</color>
+    <color name="material_blue_grey_90">#ff263238</color>
+    <color name="material_blue_grey_95">#ff21272b</color>
+    <color name="material_deep_teal_20">#ff80cbc4</color>
+    <color name="material_deep_teal_50">#ff009688</color>
+
+    <!--个人消息-->
+    <color name="my_message_text_color">#666666</color>
+    <color name="horizontal_divider">#8f8f8f</color>
+    <color name="horizontal_vertical">#8f8f8f</color>
+
+</resources>
