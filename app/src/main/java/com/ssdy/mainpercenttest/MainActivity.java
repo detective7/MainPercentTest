@@ -92,12 +92,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         from操作符，可以将一组数据和列表,自动生成一个Observable（不用绑定）
          */
         Observable<Integer> _ArrayObservable = Observable.from(new Integer[]{1, 2, 3, 4, 5, 6});
-        _ArrayObservable.subscribe(new Action1<Integer>() {
-            @Override
-            public void call(Integer integer) {
-                Log.d("OBSERVER_Action2", String.valueOf(integer));
-            }
-        });
+//        _ArrayObservable.subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.d("OBSERVER_Action2", String.valueOf(integer));
+//            }
+//        });
 
         /*Java 7 doesn’t have lambdas and higher-order functions, we’ll have to do it with classes that
          simulate lambdas. To simulate a lambda that takes one argument,
@@ -105,33 +105,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
           Java 8 已经实现了lambda表达式，即隐式函数或者说高阶函数？的能，比如，会将上面的new变成(Action1) (integer) -> {具体实现}这样
           以下我们用完整的方式，实现这种功能<输入的值类型，返回的值类型>
           */
-        _ArrayObservable = _ArrayObservable.map(new Func1<Integer, Integer>() {
-            @Override
-            public Integer call(Integer integer) {
-                return integer * integer;// Square the number
-            }
-        });
-
-        _ArrayObservable.subscribe(new Action1<Integer>() {
-            @Override
-            public void call(Integer integer) {
-                Log.d("OBSERVER_Action3", String.valueOf(integer));
-            }
-        });
+//        _ArrayObservable = _ArrayObservable.map(new Func1<Integer, Integer>() {
+//            @Override
+//            public Integer call(Integer integer) {
+//                return integer * integer;// Square the number
+//            }
+//        });
+//
+//        _ArrayObservable.subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.d("OBSERVER_Action3", String.valueOf(integer));
+//            }
+//        });
         /*Operators can be chained. For example,
         the following code block uses the skip operator to skip the first two numbers,
         and then the filter operator to ignore odd numbers:
         利用skip操作符跳过前两个数，然后继续执行剩下的数
          */
         _ArrayObservable.skip(2) // Skip the first two items
-                .filter(new Func1<Integer, Boolean>() {
-                    @Override
-                    public Boolean call(Integer integer) { // Ignores any item that returns false
-                        return integer % 2 == 0;
-                    }
+                .filter((Integer)-> { // Ignores any item that returns false
+                        return Integer % 2 == 0;
                 });
-        _ArrayObservable.subscribe((Action1) (Boolean) -> {
-            Log.d("OBSERVER_Action4", String.valueOf(Boolean));
+        _ArrayObservable.subscribe((Integer) -> {
+            Log.d("OBSERVER_Action4", String.valueOf(Integer));
 
         });
 
