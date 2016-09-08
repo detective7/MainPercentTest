@@ -1,26 +1,16 @@
 package com.ssdy.mainpercenttest;
 
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
-import rx.functions.Action;
 import rx.functions.Action1;
-import rx.functions.Func1;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
@@ -36,18 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button speakButton = (Button) findViewById(R.id.ibtn_study);
-        mList = (ListView) findViewById(R.id.ibtn_analysis);
-        PackageManager pm = getPackageManager();
-        List<ResolveInfo> activities = pm.queryIntentActivities(
-                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        if (activities.size() != 0) {
-            speakButton.setOnClickListener(this);
-        } else {
-            speakButton.setEnabled(false);
-            speakButton.setText("Recognizer not present");
-        }
 
         _Observer = new Observer<String>() {
             @Override
@@ -92,12 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         from操作符，可以将一组数据和列表,自动生成一个Observable（不用绑定）
          */
         Observable<Integer> _ArrayObservable = Observable.from(new Integer[]{1, 2, 3, 4, 5, 6});
-//        _ArrayObservable.subscribe(new Action1<Integer>() {
-//            @Override
-//            public void call(Integer integer) {
-//                Log.d("OBSERVER_Action2", String.valueOf(integer));
-//            }
-//        });
+        _ArrayObservable.subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                Log.d("OBSERVER_Action2", String.valueOf(integer));
+            }
+        });
 
         /*Java 7 doesn’t have lambdas and higher-order functions, we’ll have to do it with classes that
          simulate lambdas. To simulate a lambda that takes one argument,
@@ -105,40 +83,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
           Java 8 已经实现了lambda表达式，即隐式函数或者说高阶函数？的能，比如，会将上面的new变成(Action1) (integer) -> {具体实现}这样
           以下我们用完整的方式，实现这种功能<输入的值类型，返回的值类型>
           */
-//        _ArrayObservable = _ArrayObservable.map(new Func1<Integer, Integer>() {
-//            @Override
-//            public Integer call(Integer integer) {
-//                return integer * integer;// Square the number
-//            }
-//        });
-//
-//        _ArrayObservable.subscribe(new Action1<Integer>() {
-//            @Override
-//            public void call(Integer integer) {
-//                Log.d("OBSERVER_Action3", String.valueOf(integer));
-//            }
-//        });
+        _ArrayObservable
+                .map((Integer) -> {
+                return Integer * Integer;// Square the number
+        }).subscribe((Integer) -> {
+                Log.d("OBSERVER_Action3", String.valueOf(Integer));
+        });
         /*Operators can be chained. For example,
         the following code block uses the skip operator to skip the first two numbers,
         and then the filter operator to ignore odd numbers:
         利用skip操作符跳过前两个数，然后继续执行剩下的数
          */
-        _ArrayObservable.skip(2) // Skip the first two items
-                .filter((Integer)-> { // Ignores any item that returns false
+        _ArrayObservable
+                .skip(2) // Skip the first two items
+                .filter((Integer) -> {// Ignores any item that returns false
                         return Integer % 2 == 0;
+                })
+                .subscribe((Integer) -> {
+                    Log.d("OBSERVER_Action4", String.valueOf(Integer));
+
                 });
-        _ArrayObservable.subscribe((Integer) -> {
-            Log.d("OBSERVER_Action4", String.valueOf(Integer));
-
-        });
 
     }
-
-    public void onClick(View v) {
-        if (v.getId() == R.id.ibtn_study) {
-
-        }
-    }
-
 
 }

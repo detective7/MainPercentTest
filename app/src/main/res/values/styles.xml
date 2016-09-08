@@ -124,7 +124,6 @@
     <style name="dialog_blue_button" parent="android:Widget.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">31dp</item>
-        <item name="android:background">@drawable/blue_button_background</item>
         <item name="android:textSize">14sp</item>
         <item name="android:paddingLeft">21dp</item>
         <item name="android:paddingRight">21dp</item>
@@ -133,7 +132,6 @@
 
 
     <style name="Reg_CheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/register_checkbox_style</item>
     </style>
 
     <style name="SwitchButtonStyle">
@@ -190,7 +188,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginTop">20dp</item>
-        <item name="android:background">@drawable/shape_register_layout_bg</item>
         <item name="android:orientation">vertical</item>
     </style>
 
@@ -205,7 +202,6 @@
         <item name="android:paddingLeft">21dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">46dp</item>
-        <item name="android:background">@drawable/ripple_center_layout_bg</item>
         <item name="android:clickable">true</item>
     </style>
 
@@ -224,7 +220,6 @@
         <item name="android:paddingRight">13dp</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/person_center_layout_height</item>
-        <item name="android:background">@drawable/ripple_center_layout_bg</item>
         <item name="android:clickable">true</item>
     </style>
 
