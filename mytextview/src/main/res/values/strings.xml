@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">MyTextView</string>
+    <string name="app_name">EventBus</string>
+    <string name="string2">Click me to send a message to mainActivity</string>
+    <string name="string3">Write something to send</string>
 </resources>
