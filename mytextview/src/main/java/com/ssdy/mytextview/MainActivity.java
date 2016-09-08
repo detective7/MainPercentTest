@@ -38,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(MessageEvent event) {
-
-        String msg = "onEventMainThread收到了消息：" + event.message;
-        bt1.setText(msg);
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
-
+    /**
+     * 这里加上了判断，因为在下一个界面跳转回来之后会再次执行onStart
+     * 所以要加上判断，以免注册两次，会出错
+     * java.lang.RuntimeException: Unable to resume activity {com.ssdy.mytextview/com.ssdy.mytextview.MainActivity}:
+     * Cause By ：org.greenrobot.eventbus.EventBusException: Subscriber class com.ssdy.mytextview.MainActivity already registered to event class com.ssdy.mytextview.MessageEvent
+     */
     @Override
     public void onStart() {
         super.onStart();
@@ -55,6 +53,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 这里我从最初的教程用的onStop换成了onDestroy，因为在跳转到下个Activity会执行onStop
+     * 会订阅不到消息
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

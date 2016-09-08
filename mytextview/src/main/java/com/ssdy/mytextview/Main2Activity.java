@@ -27,9 +27,10 @@ public class Main2Activity extends AppCompatActivity {
                 String str = et1.getText().toString();
                 if (str == null || str.equals("")) {
                     Toast.makeText(Main2Activity.this, "editText is null", Toast.LENGTH_SHORT).show();
-                    EventBus.getDefault().post(new MessageEvent(""));
-                } else
+                } else {
                     EventBus.getDefault().post(new MessageEvent(str));
+                    Main2Activity.this.finish();
+                }
             }
         });
     }
