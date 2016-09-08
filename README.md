@@ -37,12 +37,12 @@ dependencies { }
 	apply plugin: 'me.tatarka.retrolambda'
 ```
 也是从某个博客上看到了，没有地址，以下是重点<br>
-1：buildTool必须使用24以上版本
+1. buildTool必须使用24以上版本
 ```
 buildToolsVersion "24.0.2"
 ```
 
-2：这里也是app里本身有的，即Java编译器jdk必须使用1.8或以上
+2. 这里也是app里本身有的，即Java编译器jdk必须使用1.8或以上
 ```
     android{  
     	compileOptions {
