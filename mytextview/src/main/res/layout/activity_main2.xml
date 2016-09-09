@@ -21,7 +21,16 @@
         android:text="@string/string2"
         android:textAllCaps="false"
         android:id="@+id/bt2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="84dp" />
+        android:layout_below="@+id/et1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/string4"
+        android:textAllCaps="false"
+        android:id="@+id/bt3"
+        android:layout_below="@+id/bt2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

@@ -2,4 +2,5 @@
     <string name="app_name">EventBus</string>
     <string name="string2">Click me to send a message to mainActivity</string>
     <string name="string3">Write something to send</string>
+    <string name="string4">Click me to send a Sticky Event to mainActivity</string>
 </resources>
