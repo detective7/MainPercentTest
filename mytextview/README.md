@@ -162,8 +162,8 @@ public class EventBusUtil {
 
 ### 参考文章： ###
 [http://greenrobot.org/eventbus/documentation/how-to-get-started/](http://greenrobot.org/eventbus/documentation/how-to-get-started/) 新的eventBus已经加上注解了
-[http://blog.csdn.net/harvic880925/article/details/40660137](http://blog.csdn.net/harvic880925/article/details/40660137)
-[http://blog.csdn.net/yanbober/article/details/45671407](http://blog.csdn.net/yanbober/article/details/45671407)
-[http://www.jianshu.com/p/da9e193e8b03](http://www.jianshu.com/p/da9e193e8b03)
-[http://blog.csdn.net/wl1769127285/article/details/51065015](http://blog.csdn.net/wl1769127285/article/details/51065015)
-[http://www.cnblogs.com/ouyanliu/p/5744862.html](http://www.cnblogs.com/ouyanliu/p/5744862.html)
+[http://blog.csdn.net/harvic880925/article/details/40660137](http://blog.csdn.net/harvic880925/article/details/40660137)<br>
+[http://blog.csdn.net/yanbober/article/details/45671407](http://blog.csdn.net/yanbober/article/details/45671407)<br>
+[http://www.jianshu.com/p/da9e193e8b03](http://www.jianshu.com/p/da9e193e8b03)<br>
+[http://blog.csdn.net/wl1769127285/article/details/51065015](http://blog.csdn.net/wl1769127285/article/details/51065015)<br>
+[http://www.cnblogs.com/ouyanliu/p/5744862.html](http://www.cnblogs.com/ouyanliu/p/5744862.html)<br>
