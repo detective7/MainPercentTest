@@ -1,8 +1,11 @@
 package com.ssdy.mainpercenttest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import rx.Observable;
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
     private ListView mList;
+    private Button btn;
 
     Observer<String> _Observer;
     Observable<String> _Observable;
@@ -26,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btn = (Button)findViewById(R.id.nextPage);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, GreenDaoActivity.class));
+            }
+        });
 
         _Observer = new Observer<String>() {
             @Override

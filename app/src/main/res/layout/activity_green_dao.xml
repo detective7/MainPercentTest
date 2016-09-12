@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ssdy.mainpercenttest.widget.GreenDaoActivity">
+    tools:context=".GreenDaoActivity">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="nextPage"
+        android:text="addUser"
         android:textAllCaps="false"
-        android:id="@+id/nextPage" />
+        android:id="@+id/addUser" />
 
     <ListView
         android:layout_width="match_parent"
