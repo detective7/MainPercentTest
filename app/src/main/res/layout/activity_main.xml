@@ -3,8 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/base_layout_bg"
-    android:gravity="center_horizontal"
     android:orientation="vertical">
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nextPage"
+        android:textAllCaps="false"
+        android:id="@+id/nextPage" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView" />
 </LinearLayout>
