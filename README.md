@@ -30,10 +30,6 @@ dependencies { }
 		}
 	}
 
-	repositories {
-		mavenCentral()
-	}
-
 	apply plugin: 'me.tatarka.retrolambda'
 ```
 也是从某个博客上看到了，没有地址，以下是重点<br>
