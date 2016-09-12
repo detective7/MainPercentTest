@@ -70,7 +70,7 @@ public class GreenDaoActivity extends AppCompatActivity {
         btn.setOnClickListener(View -> {
             User user2 = new User(null, "user1", 24, 175.5d);
             userdao.insert(user2);
-//                adapter.swapCursor(cursor);
+            adapter.notifyDataSetChanged();
         });
     }
 
