@@ -63,7 +63,7 @@ public class GreenDao {
 
         //添加用户实体,相当于生成bean的类名
         Entity user = schema.addEntity("User");
-        //指定表名，如不指定，表名则为 user（即实体类名）
+        //指定表名，如不指定，表名则为 user
         user.setTableName("user");
 
         user.implementsSerializable();
