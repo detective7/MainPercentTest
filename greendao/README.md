@@ -61,9 +61,9 @@ public class GreenDao {
         //指定自动生成的dao对象的包名,不指定则都DAO类生成在"com.example.bean"包中
         schema.setDefaultJavaPackageDao("com.example.dao");
 
-        //添加用户实体
+        //添加用户实体,相当于生成bean的类名
         Entity user = schema.addEntity("User");
-        //指定表名，如不指定，表名则为 Persion（即实体类名）
+        //指定表名，如不指定，表名则为 user（即实体类名）
         user.setTableName("user");
 
         user.implementsSerializable();
@@ -80,20 +80,17 @@ public class GreenDao {
         user.addDoubleProperty("high");//添加Double类型的high
 
         //建立相关用户详细信息表，与用户表一对一关联
-        Entity info =  schema.addEntity("information");
+        Entity info =  schema.addEntity("Information");
         info.implementsSerializable();
         info.addLongProperty("id").primaryKey().autoincrement();
         info.addStringProperty("address").notNull();
         info.addStringProperty("icon_url").notNull();
         info.addIntProperty("score").notNull();
-
        
         //information表添加外键userId
         Property propertyBack = info.addLongProperty("user_id").getProperty();
         //设置关联user表
         info.addToOne(user,propertyBack);
-        
-
 
         //java-gen路径
         String outDir = "../MainPercentTest/app/src/main/java-gen";
@@ -101,8 +98,68 @@ public class GreenDao {
         new DaoGenerator().generateAll(schema, outDir);
 
     }
-
 }
 
 ```
+在Activity里面的写法：
+```
+//这里是获取数据库对应的session
+helper = new DaoMaster.DevOpenHelper(this, "GreenDaoDemo-db");
+db = helper.getWritableDatabase();
+master = new DaoMaster(db);
+session = master.newSession();
 
+		btn.setOnClickListener(View -> {
+            User user = new User(null, "user1", 24+(int)(1+Math.random()*(10)), 175.5d);
+            userdao.insert(user);
+            adapter.setData(getData());
+            adapter.notifyDataSetChanged();
+        });
+        btn2.setOnClickListener(View ->{
+            //这里需要作判断，会插入重复项
+            Information info = new Information(null,"Shenzhen","123",30,3L);
+            infoDao.insert(info);
+            Log.d("GreenDaoDemo", "Insert success:" + info.getAddress()+info.getIcon_url()+info.getScore()+info.getUser().getAge());
+        });
+
+	//selectAllUser查询所有用户
+    public List<User> getData(){
+        List<User> _users = new ArrayList<User>();
+        cursor = db.query(userdao.getTablename(), userdao.getAllColumns(), null, null, null, null, null);
+        Log.d("GreenDaoDemo", cursor.getCount() + "");
+        User user;
+        while (cursor.moveToNext()) {
+            user = new User();
+            user.setUserId(cursor.getLong(cursor.getColumnIndex("USER_ID")));
+            user.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+            user.setAge(cursor.getInt(cursor.getColumnIndex("AGE")));
+            user.setHigh(cursor.getDouble(cursor.getColumnIndex("HIGH")));
+            _users.add(user);
+        }
+        return _users;
+    }
+
+	//selectAllInfo查询所有用户信息
+    public List<Information>  fetInfo(){
+        List<Information> _Informations = new ArrayList<Information>();
+        cursor = db.query(infoDao.getTablename(), infoDao.getAllColumns(), null, null, null, null, null);
+        Log.d("GreenDaoDemo", cursor.getCount() + "");
+        Information info;
+        while (cursor.moveToNext()) {
+            info = new Information();
+            info.setInfoId(cursor.getLong(cursor.getColumnIndex("INFO_ID")));
+            info.setAddress(cursor.getString(cursor.getColumnIndex("ADDRESS")));
+            info.setIcon_url(cursor.getString(cursor.getColumnIndex("ICON_URL")));
+            info.setScore(cursor.getInt(cursor.getColumnIndex("SCORE")));
+            info.setUser_id(cursor.getLong(cursor.getColumnIndex("USER_ID")));
+            _Informations.add(info);
+        }
+        return _Informations;
+    }
+```
+```
+ //还自动生成了获取对应User的代码
+ User relativeUser = info.getUser();
+```
+如上面的代码，再添加info实体时，若添加的userid不存在，会抛出异常
+##### 新建一个1对多的关联表 #####
