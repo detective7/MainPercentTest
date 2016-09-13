@@ -26,8 +26,6 @@ public class GreenDaoActivity extends AppCompatActivity {
     private Cursor cursor;
     private SQLiteDatabase db;
 
-    private List<User> _users;
-
     private Button btn;
     private ListView listView;
 
@@ -46,32 +44,33 @@ public class GreenDaoActivity extends AppCompatActivity {
 
         userdao = session.getUserDao();
 
-        _users = new ArrayList<User>();
-
         for (String str : userdao.getAllColumns()) {
             Log.d("GreenDaoDemo", str);
         }
-        cursor = db.query(userdao.getTablename(), userdao.getAllColumns(), null, null, null, null, null);
-        Log.d("GreenDaoDemo", cursor.getCount() + "");
-        int i = 0;
-        User user = new User();
-        while (cursor.moveToNext()) {
-//            _users.get(i).setName("1");
-//            _users.get(i).setAge(23);
-//            _users.get(i).setHigh(170.6d);
-            user.setName(cursor.getString(cursor.getColumnIndex("NAME")));
-            user.setAge(Integer.valueOf(cursor.getString(cursor.getColumnIndex("AGE"))));
-            user.setHigh(Double.valueOf(cursor.getString(cursor.getColumnIndex("HIGH"))));
-            _users.add(user);
-        }
-        adapter = new SimpleAdapter(this, _users);
+
+        adapter = new SimpleAdapter(this, getData());
         listView.setAdapter(adapter);
 
         btn.setOnClickListener(View -> {
             User user2 = new User(null, "user1", 24, 175.5d);
             userdao.insert(user2);
+            adapter.setData(getData());
             adapter.notifyDataSetChanged();
         });
+    }
+
+    public List<User> getData(){
+        List<User> _users = new ArrayList<User>();
+        cursor = db.query(userdao.getTablename(), userdao.getAllColumns(), null, null, null, null, null);
+        Log.d("GreenDaoDemo", cursor.getCount() + "");
+        User user = new User();
+        while (cursor.moveToNext()) {
+            user.setName(cursor.getString(cursor.getColumnIndex("NAME")));
+            user.setAge(Integer.valueOf(cursor.getString(cursor.getColumnIndex("AGE"))));
+            user.setHigh(Double.valueOf(cursor.getString(cursor.getColumnIndex("HIGH"))));
+            _users.add(user);
+        }
+        return _users;
     }
 
 }

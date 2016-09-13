@@ -1,3 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="1d2a0d11e1398e79bb2835a69af03161f23e341e">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\instant-run_a16f6bc4e9759de92c6a1a470851f7a495a2e78f.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.1.0_b50cd8dbe0b970ba15ffd91cce77a4197d706e21.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.0.12\277d8a8184f92951355d8ddbcac855bf8f12bc5e\rxjava-1.0.12.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="277d8a8184f92951355d8ddbcac855bf8f12bc5e">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\rxjava-1.0.12_92c55dc9e1c8065845927893043875dd868b8f15.jar" />
+    </item>
+    <item
+        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_367486334497ca5efbbf3708b676df1c95b517b9.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.4.0_00674a33c16882f5f579c98671d388b6382b8cb4.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-api\3.1.0\4669bc7c200009695ba1e990bd4eddac243a00a\greendao-api-3.1.0.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="04669bc7c200009695ba1e990bd4eddac243a00a">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\greendao-api-3.1.0_001842f2f789d37518891dddd0f0c24c09dc15be.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\io.reactivex\rxandroid\0.25.0\866b539d3ae58abbd47880f243c02f914fec5cda\rxandroid-0.25.0.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="866b539d3ae58abbd47880f243c02f914fec5cda">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\rxandroid-0.25.0_aeb2752a6ec9356fbb7ff2b1aa6b6901d3224591.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0_7e59044e76ab7e9b66dcaea2d34a6f0c8fdb0242.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="4cd7c5af8cea439ef3d6a2f8e4895057baa5f9b1">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_7e7b1c67cc4767a4de46b2026c3f02d486266a5f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Administrator\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\3.1.0\70d6a26bba227c2736606a5eb6edc3c15ac0ad6a\greendao-3.1.0.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="70d6a26bba227c2736606a5eb6edc3c15ac0ad6a">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\greendao-3.1.0_c7c207da6259415b572f9f034d17147e6921d9b1.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-8.1.0_9c3787aa36e19d7056f3c3831f19d7783c9eea5d.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.4.0_1ea63c70958f5d89aa90401e444d8774e266587f.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\percent\23.2.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="f11c0ed172c2ea17ad5e999df892d363ffa6c35b">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.android.support-percent-23.2.0_7f1ad68238eb7320aadda145d84d5db69dce0215.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-23.4.0_75438d66c1079fca18f18d9287c7eb9fe27f93ec.jar" />
+    </item>
+    <item
+        jar="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="24.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="E:\AndroidStudioProjects\MainPercentTest\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-23.4.0_2ac6d93b74e809284d2815810c13983e6f142ef0.jar" />
+    </item>
+
+</items>

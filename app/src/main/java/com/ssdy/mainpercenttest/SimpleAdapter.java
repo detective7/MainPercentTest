@@ -25,6 +25,11 @@ public class SimpleAdapter extends BaseAdapter {
         this._inflater=LayoutInflater.from(_context);
         this._users = _users;
     }
+
+    public void setData(List<User> _users){
+        this._users=_users;
+    }
+
     @Override
     public int getCount() {
         return _users.size();
