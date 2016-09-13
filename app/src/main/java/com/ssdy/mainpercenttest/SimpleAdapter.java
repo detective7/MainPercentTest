@@ -51,6 +51,7 @@ public class SimpleAdapter extends BaseAdapter {
         if(convertView==null){
             convertView = _inflater.inflate(R.layout.item,null);
             holder = new ViewHolder();
+            holder.uId = (TextView)convertView.findViewById(R.id.uId);
             holder.uName = (TextView) convertView.findViewById(R.id.uName);
             holder.age = (TextView) convertView.findViewById(R.id.age);
             holder.height = (TextView) convertView.findViewById(R.id.height);
@@ -58,6 +59,7 @@ public class SimpleAdapter extends BaseAdapter {
         }else{
             holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
         }
+        holder.uId.setText(_users.get(position).getUserId()+"");
         holder.uName.setText(_users.get(position).getName());
         holder.age.setText(_users.get(position).getAge()+"");
         holder.height.setText(_users.get(position).getHigh()+"");
@@ -65,8 +67,8 @@ public class SimpleAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /**存放控件*/
     public final class ViewHolder{
+        public TextView uId;
         public TextView uName;
         public TextView age;
         public TextView height;

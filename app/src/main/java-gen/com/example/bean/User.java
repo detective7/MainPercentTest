@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.*;
 public class User implements java.io.Serializable {
 
     @Id(autoincrement = true)
-    private Long id;
+    private Long userId;
 
     @NotNull
     private String name;
@@ -21,24 +21,24 @@ public class User implements java.io.Serializable {
     public User() {
     }
 
-    public User(Long id) {
-        this.id = id;
+    public User(Long userId) {
+        this.userId = userId;
     }
 
-    @Generated(hash = 1917775038)
-    public User(Long id, @NotNull String name, Integer age, Double high) {
-        this.id = id;
+    @Generated(hash = 317887638)
+    public User(Long userId, @NotNull String name, Integer age, Double high) {
+        this.userId = userId;
         this.name = name;
         this.age = age;
         this.high = high;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @NotNull

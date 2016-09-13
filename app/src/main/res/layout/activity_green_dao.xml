@@ -12,6 +12,15 @@
         android:textAllCaps="false"
         android:id="@+id/addUser" />
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="addInfo"
+        android:layout_toRightOf="@+id/addUser"
+        android:textAllCaps="false"
+        android:id="@+id/addInfo" />
+
     <ListView
         android:layout_below="@+id/addUser"
         android:layout_width="match_parent"
