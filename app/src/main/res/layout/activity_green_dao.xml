@@ -24,6 +24,12 @@
     <ListView
         android:layout_below="@+id/addUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:id="@+id/listView" />
+    <ListView
+        android:layout_below="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/listView2" />
 </RelativeLayout>

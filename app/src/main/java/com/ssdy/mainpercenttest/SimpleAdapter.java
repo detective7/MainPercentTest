@@ -12,8 +12,8 @@ import com.example.bean.User;
 import java.util.List;
 
 /**
- * Name: ${Name}
- * Describe:
+ * Name: SimpleAdapter
+ * Describe: 用户表
  * Created by ys on 2016/9/12 17:55.
  */
 public class SimpleAdapter extends BaseAdapter {
