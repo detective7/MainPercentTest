@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".Main3Activity" />
+        <activity android:name=".Main2Activity" android:process=":remote" />
+        <activity android:name=".Main3Activity" android:process="com.ssdy.mytextview.remote"/>
         <activity android:name=".Main4Activity" />
         <activity android:name=".BaseActivty"></activity>
     </application>
