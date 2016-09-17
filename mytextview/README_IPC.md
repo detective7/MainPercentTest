@@ -46,9 +46,15 @@ u0_a57    4413  1137  1548876 41460 ffffffff 3c3f7f7a S com.ssdy.mytextview.remo
 ```
 > 进程名以“：”开头的进程，属于当前应用的**私有进程**，其他应用的组件不可以和它跑在同一个进程中，所以会在当前指定的进程名前面加上当前的包名，这是一种间歇的方法；而其它不以“：”开头的进程属于**全局进程**，其他应用通过ShareUID方式可以和它泡在同一进程。
 
-*跳过运行机制，稍后补上*<br>
+##### 多进程模式的运行机制 #####
+> 多进程绝非只是仅仅制定一个android：process属性这么简单
+> 我们知道Android为每一个应用分配了一个独立的虚拟机，或者说为每一个进程分配一个独立的虚拟机，不同的虚拟机在内存分配上有不同的地址空间，这就导致在不同的虚拟机中访问同一个类的对象会产生多份副本。一般来说，使用多进程会造成如下几方面问题：
+> 1.静态成员和单例模式在两个进程之间，所能实现的功能完全失效
+> 2.线程同步机制，在两进程间失效
+> 3.SharePreferenc的可靠性下降
+> 4.Application会多次创建（以下将解释这个问题）
 
-查看这三个组件（Activity）是否运行在不同的Application中，我们在MyApplication中加入一个Log输出当前Application名<br>
+查看这三个组件（Activity）->即前面的三个进程，是否运行在不同的Application中，我们在MyApplication中加入一个Log输出当前Application名<br>
 ```
 public class MyApplication extends Application {
 
@@ -84,3 +90,5 @@ public class MyUtil {
 4351-4351/com.ssdy.mytextview:remote D/MyApplication: application start,process name:com.ssdy.mytextview:remote
 4413-4413/com.ssdy.mytextview.remote D/MyApplication: application start,process name:com.ssdy.mytextview.remote
 ```
+
+## IPC的基础，关于序列化接口，反序列化接口和Binder ##
