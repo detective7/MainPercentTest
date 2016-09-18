@@ -186,7 +186,14 @@ public class UserDao extends AbstractDao<User, Long> {
 ```
 compile 'org.greenrobot:greendao:3.0.1'
 ```
-就可以了
+还有就是生成文件夹所在的位置，我发现，GreenDao默认生成文件的位置，在后期调用的时候有问题，所以在Gradle里加上了设置目录的语句：
+```
+greendao {
+    schemaVersion 1
+    daoPackage 'com.ssdy.greendao' //生成的包名
+    targetGenDir 'src/main/java' //在哪个目录下生成文件
+}
+```
 #### 建立1对多关联表
 在Bean包里建立两个类，User和Book
 User可以对应多个Book（实际还没实现，暂时是1对1）
@@ -217,6 +224,8 @@ public class Book{
 }
 ```
 然后Build->Make Project
+系统就会自动生成这几个文件
+![](http://i.imgur.com/gOOS8JW.png)
 > 在MyApplication里面获取数据库操作权限
 
 ```
