@@ -1,8 +1,6 @@
 # GreenDao #
 ## 配置 ##
 我采用3.0的版本
-  - [方法1](# 方法1 #)
-
 #### app.gradle ####
 ```
 
@@ -29,7 +27,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 ```
-# 方法1 #
+### 方法1：原始的用纯Java工程生成dao文件的方法 ###
 1.在app/src/main目录下（这里可以根据自己需求，后面有指定目录的配置），新建一个java-gen的目录，然后在app.gradle中加入
 ```
 android {
@@ -165,3 +163,23 @@ session = master.newSession();
 ```
 如上面的代码，再添加info实体时，若添加的userid不存在，会抛出异常
 ##### 新建一个1对多的关联表 #####
+
+
+
+
+
+
+
+
+
+### 方法2：原始注解生成dao文件的方法 ###
+产生问题1：
+由于生成的dao文件总是出现
+> 错误: UserDao不是抽象的, 并且未覆盖AbstractDao中的抽象方法hasKey(User)
+public class UserDao extends AbstractDao<User, Long> {
+
+所以，索性将gradle改成
+```
+compile 'org.greenrobot:greendao:3.0.1'
+```
+就可以了
