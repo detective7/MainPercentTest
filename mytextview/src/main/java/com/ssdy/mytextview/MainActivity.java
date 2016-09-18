@@ -6,9 +6,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ssdy.Bean.User;
+import com.ssdy.greendao.DaoSession;
+import com.ssdy.greendao.UserDao;
+
+import java.util.List;
+
+
 public class MainActivity extends BaseActivty<MessageEvent> {
 
     private Button bt1;
+    private UserDao _UserDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +26,32 @@ public class MainActivity extends BaseActivty<MessageEvent> {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,Main2Activity.class));
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
             }
         });
+        initData();
+    }
+
+    private void initData() {
+        DaoSession _daoSession = ((MyApplication) getApplication()).getDaoSession();
+        _UserDao = _daoSession.getUserDao();
+        //插入、保存数据：如果key属性不为null，会更新这个对象；如果为null，会插入这个对象：
+        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("Ice")).build().list().size()==0) {
+            User _User = new User(null, "Ice", 12, 142, "冰与火之歌");
+            _UserDao.insert(_User);
+        }
+        //查询数据
+        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
+        //unique()表示查询结果为一条数据，若数据不存在，_SelectUser为null。
+        Log.d("GreenDao", _SelectUser.getUser_id() + "");
+        //获取多个结果
+        List<User> _Users = _UserDao.queryBuilder()
+                .where(UserDao.Properties.User_id.notEq(10)) //查询条件
+                .orderAsc(UserDao.Properties.User_id) //按首字母排列
+                .limit(10)  //限制查询结果个数
+                .build().list(); //结果放进list中
+        Log.d("GreenDao", _Users.size() + "");
+
     }
 
     // This method will be called when a MessageEvent is posted (in the UI thread for Toast)
@@ -33,7 +64,7 @@ public class MainActivity extends BaseActivty<MessageEvent> {
     @Override
     public void onBackEvent(MessageEvent event) {
         super.onBackEvent(event);
-        Log.d("EventBus_thread_back",Thread.currentThread().getName());
+        Log.d("EventBus_thread_back", Thread.currentThread().getName());
     }
 
     /*@Subscribe(threadMode = ThreadMode.BACKGROUND)
