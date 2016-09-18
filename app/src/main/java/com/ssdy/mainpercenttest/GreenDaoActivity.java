@@ -74,8 +74,9 @@ public class GreenDaoActivity extends AppCompatActivity {
             adapter.notifyDataSetChanged();
         });
         btn2.setOnClickListener(View ->{
-            //这里需要作判断，会插入重复项
+            //TODO 这里需要作判断，会插入重复项
             Information info = new Information(null,"Shenzhen","123",30,1L);
+            info.setUser(userdao.load(1L));
 //            infoDao.
             infoDao.insert(info);
             Log.d("GreenDaoDemo", "Insert success:" + info.getAddress()+info.getIcon_url()+info.getScore()+info.getUser().getAge());
