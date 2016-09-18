@@ -91,4 +91,4 @@ public class MyUtil {
 4413-4413/com.ssdy.mytextview.remote D/MyApplication: application start,process name:com.ssdy.mytextview.remote
 ```
 
-## IPC的基础，关于序列化接口，反序列化接口和Binder ##
+## IPC的基础，关于序列化接口和Binder ##
