@@ -1,9 +1,12 @@
 # GreenDao #
 ## 配置 ##
 我采用3.0的版本
+  - [方法1](#方法1原始的用纯java工程生成dao文件)
+  - [方法2](#方法2原始注解生成dao文件)
+
+### 方法1：原始的用纯Java工程生成dao文件 ###
 #### app.gradle ####
 ```
-
 dependencies {
     ......其它依赖库
     compile 'org.greenrobot:greendao:3.1.0'
@@ -27,7 +30,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 ```
-### 方法1：原始的用纯Java工程生成dao文件的方法 ###
 1.在app/src/main目录下（这里可以根据自己需求，后面有指定目录的配置），新建一个java-gen的目录，然后在app.gradle中加入
 ```
 android {
@@ -51,6 +53,7 @@ dependencies {
 
 3.然后在新module里的类，建立main函数，就可以开始写新建表的语句了
 ##### 新建一个1对1的关联表 #####
+
 ```
 public class GreenDao {
     public static void  main(String[] args) throws Exception {
@@ -99,8 +102,8 @@ public class GreenDao {
 
     }
 }
-
 ```
+
 在Activity里面的写法：
 ```
 //这里是获取数据库对应的session
@@ -163,3 +166,120 @@ session = master.newSession();
 ```
 如上面的代码，再添加info实体时，若添加的userid不存在，会抛出异常
 ##### 新建一个1对多的关联表 #####
+
+
+
+
+
+
+
+
+
+### Usage2
+### 方法2：原始注解生成dao文件 ###
+产生问题：
+由于生成的dao文件总是出现
+> 错误: UserDao不是抽象的, 并且未覆盖AbstractDao中的抽象方法hasKey(User)
+public class UserDao extends AbstractDao<User, Long> {
+
+所以，索性将gradle改成
+```
+compile 'org.greenrobot:greendao:3.0.1'
+```
+还有就是生成文件夹所在的位置，我发现，GreenDao默认生成文件的位置，在后期调用的时候有问题，所以在Gradle里加上了设置目录的语句：
+```
+greendao {
+    schemaVersion 1
+    daoPackage 'com.ssdy.greendao' //生成的包名
+    targetGenDir 'src/main/java' //在哪个目录下生成文件
+}
+```
+#### 建立1对多关联表
+在Bean包里建立两个类，User和Book
+User可以对应多个Book（实际还没实现，暂时是1对1）
+```
+@Entity
+public class User {
+    @Id
+    private Long user_id;
+    @NotNull
+    private String Name;
+    private int age;
+    private int height;
+    private String bookName;
+    @ToMany(joinProperties = {
+            @JoinProperty(name = "bookName",referencedName = "book")
+    })
+    private List<Book> ownedBooks;
+}
+```
+
+```
+@Entity
+public class Book{
+    @Id
+    private Long id;
+    @NotNull
+    private String book;
+}
+```
+然后Build->Make Project
+系统就会自动生成这几个文件
+![](http://i.imgur.com/gOOS8JW.png)
+> 在MyApplication里面获取数据库操作权限
+
+```
+public class MyApplication extends Application {
+
+    private static final String TAG = "MyApplication";
+
+    public DaoSession getDaoSession() {
+        return daoSession;
+    }
+
+    public void setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+    }
+
+    private DaoSession daoSession;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ……
+        //创建数据库
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this,"library_db");
+        //DevOpenHelper helper = new DevOpenHelper(this, 是否加密 ? "notes-db-encrypted" : "notes-db");
+        //获取数据库读写的权限，如果进行加密调用helper.getEncryptedWritableDb("super-secret")，参数为设置的密码
+        //Database db = 是否加密 ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
+        Database db =  helper.getWritableDb();
+        daoSession = new DaoMaster(db).newSession();
+    }
+}
+```
+> 在MainActivity插入和查询User
+
+```
+private void initData() {
+        DaoSession _daoSession = ((MyApplication) getApplication()).getDaoSession();
+        _UserDao = _daoSession.getUserDao();
+        //插入、保存数据：如果key属性不为null，会更新这个对象；如果为null，会插入这个对象：
+        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("Ice")).build().list().size()==0) {
+            User _User = new User(null, "Ice", 12, 142, "冰与火之歌");
+            _UserDao.insert(_User);
+        }
+        //查询数据
+        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
+        //unique()表示查询结果为一条数据，若数据不存在，_SelectUser为null。
+        Log.d("GreenDao", _SelectUser.getUser_id() + "");
+        //获取多个结果
+        List<User> _Users = _UserDao.queryBuilder()
+                .where(UserDao.Properties.User_id.notEq(10)) //查询条件
+                .orderAsc(UserDao.Properties.User_id) //按首字母排列
+                .limit(10)  //限制查询结果个数
+                .build().list(); //结果放进list中
+        Log.d("GreenDao", _Users.size() + "");
+
+    }
+```
+
