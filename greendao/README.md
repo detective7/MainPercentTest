@@ -4,9 +4,9 @@
   - [方法1](#方法1原始的用纯java工程生成dao文件)
   - [方法2](#方法2原始注解生成dao文件)
 
+### 方法1：原始的用纯Java工程生成dao文件 ###
 #### app.gradle ####
 ```
-
 dependencies {
     ......其它依赖库
     compile 'org.greenrobot:greendao:3.1.0'
@@ -30,7 +30,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 ```
-### 方法1：原始的用纯Java工程生成dao文件 ###
 1.在app/src/main目录下（这里可以根据自己需求，后面有指定目录的配置），新建一个java-gen的目录，然后在app.gradle中加入
 ```
 android {
@@ -54,6 +53,7 @@ dependencies {
 
 3.然后在新module里的类，建立main函数，就可以开始写新建表的语句了
 ##### 新建一个1对1的关联表 #####
+
 ```
 public class GreenDao {
     public static void  main(String[] args) throws Exception {
@@ -102,8 +102,8 @@ public class GreenDao {
 
     }
 }
-
 ```
+
 在Activity里面的写法：
 ```
 //这里是获取数据库对应的session
@@ -216,7 +216,9 @@ public class Book{
     private String book;
 }
 ```
+然后Build->Make Project
 > 在MyApplication里面获取数据库操作权限
+
 ```
 public class MyApplication extends Application {
 
@@ -247,6 +249,7 @@ public class MyApplication extends Application {
 }
 ```
 > 在MainActivity插入和查询User
+
 ```
 private void initData() {
         DaoSession _daoSession = ((MyApplication) getApplication()).getDaoSession();
