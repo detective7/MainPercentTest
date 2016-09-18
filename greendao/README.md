@@ -1,7 +1,7 @@
 # GreenDao #
 ## 配置 ##
 我采用3.0的版本
-  - [方法1](### 方法1：原始的用纯Java工程生成dao文件的方法 ###)
+  - [方法1](# 方法1 #)
 
 #### app.gradle ####
 ```
@@ -29,7 +29,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 ```
-### 方法1：原始的用纯Java工程生成dao文件的方法 ###
+# 方法1 #
 1.在app/src/main目录下（这里可以根据自己需求，后面有指定目录的配置），新建一个java-gen的目录，然后在app.gradle中加入
 ```
 android {
