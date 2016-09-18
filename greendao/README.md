@@ -1,7 +1,8 @@
 # GreenDao #
 ## 配置 ##
 我采用3.0的版本
-  - [Usage](### usage)
+  - [Usage](###usage2)
+
 #### app.gradle ####
 ```
 
@@ -173,7 +174,7 @@ session = master.newSession();
 
 
 
-### Usage
+### Usage2
 ### 方法2：原始注解生成dao文件的方法 ###
 产生问题1：
 由于生成的dao文件总是出现
