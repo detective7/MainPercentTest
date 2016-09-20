@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.ssdy.Bean.Book;
 import com.ssdy.Bean.User;
+import com.ssdy.greendao.BookDao;
 import com.ssdy.greendao.DaoSession;
 import com.ssdy.greendao.UserDao;
 
@@ -17,6 +19,7 @@ public class MainActivity extends BaseActivty<MessageEvent> {
 
     private Button bt1;
     private UserDao _UserDao;
+    private BookDao _BookDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +38,20 @@ public class MainActivity extends BaseActivty<MessageEvent> {
     private void initData() {
         DaoSession _daoSession = ((MyApplication) getApplication()).getDaoSession();
         _UserDao = _daoSession.getUserDao();
+        _BookDao = _daoSession.getBookDao();
         //插入、保存数据：如果key属性不为null，会更新这个对象；如果为null，会插入这个对象：
-        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("Ice")).build().list().size()==0) {
-            User _User = new User(null, "Ice", 12, 142, "冰与火之歌");
+        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().list().size()==0) {
+            User _User = new User(null, "OK", 16, 162, "King");
             _UserDao.insert(_User);
+            Book _Book = new Book(null,"King");
+            _BookDao.insert(_Book);
         }
         //查询数据
         User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
         //unique()表示查询结果为一条数据，若数据不存在，_SelectUser为null。
-        Log.d("GreenDao", _SelectUser.getUser_id() + "");
+        if (_SelectUser!=null) {
+            Log.d("GreenDao", _SelectUser.getUser_id() + "");
+        }
         //获取多个结果
         List<User> _Users = _UserDao.queryBuilder()
                 .where(UserDao.Properties.User_id.notEq(10)) //查询条件
