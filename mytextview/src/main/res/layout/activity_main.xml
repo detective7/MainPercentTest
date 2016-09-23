@@ -17,4 +17,15 @@
         android:layout_marginLeft="55dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="71dp" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/ima"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/bt1"
+        android:layout_toEndOf="@+id/bt1"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="9dp" />
 </RelativeLayout>

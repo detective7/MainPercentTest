@@ -1,1 +1,1 @@
-include ':app', ':mytextview', ':greendao'
+include ':app', ':mytextview', ':greendao', ':customview', ':test'

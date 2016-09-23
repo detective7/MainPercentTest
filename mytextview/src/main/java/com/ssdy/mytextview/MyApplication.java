@@ -1,6 +1,7 @@
 package com.ssdy.mytextview;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.ssdy.greendao.DaoMaster;
@@ -15,6 +16,7 @@ import org.greenrobot.greendao.database.Database;
  */
 public class MyApplication extends Application {
 
+    private static Context context;
     private static final String TAG = "MyApplication";
 
     public DaoSession getDaoSession() {
@@ -30,6 +32,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         String processName = MyUtil.getProcessName(getApplicationContext());
         Log.d(TAG,"application start,process name:"+processName);
         //创建数据库
@@ -39,5 +42,11 @@ public class MyApplication extends Application {
         //Database db = 是否加密 ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         Database db =  helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
+    }
+    /**
+     *获取应用全局上下文
+     * */
+    public static Context getContext() {
+        return context;
     }
 }

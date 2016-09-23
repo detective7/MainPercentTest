@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
 import com.ssdy.Bean.Book;
 import com.ssdy.Bean.User;
 import com.ssdy.greendao.BookDao;
@@ -20,6 +22,8 @@ public class MainActivity extends BaseActivty<MessageEvent> {
     private Button bt1;
     private UserDao _UserDao;
     private BookDao _BookDao;
+    ImageView iv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class MainActivity extends BaseActivty<MessageEvent> {
             }
         });
         initData();
+        iv = (ImageView) findViewById(R.id.ima);
+        Picasso.with(MyApplication.getContext()).load("http://172.16.2.124:8080/english/rest/show/listenrecord").into(iv);
+
     }
 
     private void initData() {
