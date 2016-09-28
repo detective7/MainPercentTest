@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivty<MessageEvent> {
         if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().list().size()==0) {
             User _User = new User(null, "OK", 16, 162, "King");
             _UserDao.insert(_User);
-            Book _Book = new Book(null,"King");
+            Book _Book = new Book(null,"King",1L);
             _BookDao.insert(_Book);
         }
         //查询数据

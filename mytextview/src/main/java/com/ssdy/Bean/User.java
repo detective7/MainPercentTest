@@ -20,12 +20,13 @@ import java.util.List;
  */
 @Entity
 public class User {
-    @Id
+    @Id(autoincrement=true)  //此处为自增长
     private Long user_id;
     @NotNull
     private String Name;
     private int age;
     private int height;
+    //官网方法二，表连接
     private String bookName;
     @ToMany(joinProperties = {
             @JoinProperty(name = "bookName",referencedName = "book")
