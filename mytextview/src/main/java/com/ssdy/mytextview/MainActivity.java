@@ -1,6 +1,5 @@
 package com.ssdy.mytextview;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +13,6 @@ import com.ssdy.greendao.BookDao;
 import com.ssdy.greendao.DaoSession;
 import com.ssdy.greendao.UserDao;
 
-import java.util.List;
-
 
 public class MainActivity extends BaseActivty<MessageEvent> {
 
@@ -23,20 +20,28 @@ public class MainActivity extends BaseActivty<MessageEvent> {
     private UserDao _UserDao;
     private BookDao _BookDao;
     ImageView iv;
+    private int a=1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initData();
         bt1 = (Button) this.findViewById(R.id.bt1);
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+//                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+                User _User = new User(null,"name"+a,16+a,168+a,12L+Long.valueOf(a));
+//                _UserDao.insert(_User);
+                _UserDao.save(_User);
+                Book _Book = new Book(null,"bookname"+a,null);
+                _BookDao.insert(_Book);
+                a++;
             }
         });
-        initData();
         iv = (ImageView) findViewById(R.id.ima);
         Picasso.with(MyApplication.getContext()).load("http://172.16.2.124:8080/english/rest/show/listenrecord").into(iv);
 
@@ -47,25 +52,25 @@ public class MainActivity extends BaseActivty<MessageEvent> {
         _UserDao = _daoSession.getUserDao();
         _BookDao = _daoSession.getBookDao();
         //插入、保存数据：如果key属性不为null，会更新这个对象；如果为null，会插入这个对象：
-        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().list().size()==0) {
-            User _User = new User(null, "OK", 16, 162, "King");
-            _UserDao.insert(_User);
-            Book _Book = new Book(null,"King",1L);
-            _BookDao.insert(_Book);
-        }
+//        if(_UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().list().size()==0) {
+//            User _User = new User(null, "OK"+a, 16+a, 162+a, "King"+a);
+//            _UserDao.insert(_User);
+//            Book _Book = new Book(null,"King"+a);
+//            _BookDao.insert(_Book);
+//        }
         //查询数据
-        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
+//        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
         //unique()表示查询结果为一条数据，若数据不存在，_SelectUser为null。
-        if (_SelectUser!=null) {
-            Log.d("GreenDao", _SelectUser.getUser_id() + "");
-        }
+//        if (_SelectUser!=null) {
+//            Log.d("GreenDao", _SelectUser.getU_id() + "");
+//        }
         //获取多个结果
-        List<User> _Users = _UserDao.queryBuilder()
-                .where(UserDao.Properties.User_id.notEq(10)) //查询条件
-                .orderAsc(UserDao.Properties.User_id) //按首字母排列
-                .limit(10)  //限制查询结果个数
-                .build().list(); //结果放进list中
-        Log.d("GreenDao", _Users.size() + "");
+//        List<User> _Users = _UserDao.queryBuilder()
+//                .where(UserDao.Properties.U_id.notEq(10)) //查询条件
+//                .orderAsc(UserDao.Properties.U_id) //按首字母排列
+//                .limit(10)  //限制查询结果个数
+//                .build().list(); //结果放进list中
+//        Log.d("GreenDao", _Users.size() + "");
 
     }
 
