@@ -18,33 +18,13 @@ import org.greenrobot.greendao.annotation.ToOne;
 @Entity
 public class Book{
     @Id(autoincrement=true)  //此处为自增长
-    private Long id;
+    private Long b_id;
     @NotNull
     private String book;
+
     private Long userId;
     @ToOne(joinProperty = "userId")
     private User user;
-    @Generated(hash = 251390918)
-    private transient Long user__resolvedKey;
-    /** Used for active entity operations. */
-    @Generated(hash = 1097957864)
-    private transient BookDao myDao;
-    /** Used to resolve relations */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
-
-    public String getBook() {
-        return this.book;
-    }
-    public void setBook(String book) {
-        this.book = book;
-    }
-    public Long getId() {
-        return this.id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
      * Entity must attached to an entity context.
@@ -79,11 +59,11 @@ public class Book{
         myDao.delete(this);
     }
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 34413221)
+    @Generated(hash = 354249396)
     public void setUser(User user) {
         synchronized (this) {
             this.user = user;
-            userId = user == null ? null : user.getUser_id();
+            userId = user == null ? null : user.getU_id();
             user__resolvedKey = userId;
         }
     }
@@ -105,25 +85,46 @@ public class Book{
         }
         return user;
     }
+    @Generated(hash = 251390918)
+    private transient Long user__resolvedKey;
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1115456930)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getBookDao() : null;
     }
+    /** Used for active entity operations. */
+    @Generated(hash = 1097957864)
+    private transient BookDao myDao;
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
     public Long getUserId() {
         return this.userId;
     }
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    @Generated(hash = 822560630)
-    public Book(Long id, @NotNull String book, Long userId) {
-        this.id = id;
+    public String getBook() {
+        return this.book;
+    }
+    public void setBook(String book) {
+        this.book = book;
+    }
+    public Long getB_id() {
+        return this.b_id;
+    }
+    public void setB_id(Long b_id) {
+        this.b_id = b_id;
+    }
+    @Generated(hash = 1685608308)
+    public Book(Long b_id, @NotNull String book, Long userId) {
+        this.b_id = b_id;
         this.book = book;
         this.userId = userId;
     }
     @Generated(hash = 1839243756)
     public Book() {
     }
+
 }
