@@ -34,12 +34,14 @@ public class MainActivity extends BaseActivty<MessageEvent> {
             @Override
             public void onClick(View v) {
 //                startActivity(new Intent(MainActivity.this, Main2Activity.class));
-                User _User = new User(null,"name"+a,16+a,168+a,12L+Long.valueOf(a));
+                //User _User = new User(null,"name"+a,16+a,168+a,12L+Long.valueOf(a));
 //                _UserDao.insert(_User);
-                _UserDao.save(_User);
-                Book _Book = new Book(null,"bookname"+a,null);
-                _BookDao.insert(_Book);
-                a++;
+                //_UserDao.save(_User);
+                //Book _Book = new Book(null,"bookname"+a,null);
+                //_BookDao.insert(_Book);
+                //a++;
+                Book _SeBook = _UserDao.queryBuilder().where(UserDao.Properties.U_id.eq(4L)).build().unique().getBook();
+                Toast.makeText(MainActivity.this, _SeBook.getBook(), Toast.LENGTH_SHORT).show();
             }
         });
         iv = (ImageView) findViewById(R.id.ima);
