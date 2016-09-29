@@ -8,11 +8,8 @@ import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.JoinProperty;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.ToMany;
-
-import java.util.List;
+import org.greenrobot.greendao.annotation.ToOne;
 
 /**
  * Describe:
@@ -21,17 +18,19 @@ import java.util.List;
 @Entity
 public class User {
     @Id(autoincrement=true)  //此处为自增长
-    private Long user_id;
+    private Long u_id;
     @NotNull
     private String Name;
     private int age;
     private int height;
-    //官网方法二，表连接
-    private String bookName;
-    @ToMany(joinProperties = {
-            @JoinProperty(name = "bookName",referencedName = "book")
-    })
-    private List<Book> ownedBooks;
+
+    private Long bookId;
+    @ToOne(joinProperty = "bookId")
+    private Book book;
+//    @ToMany(joinProperties = {
+//            @JoinProperty(name = "bookName",referencedName = "book")
+//    })
+//    private List<Book> ownedBooks;
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
      * Entity must attached to an entity context.
@@ -65,32 +64,35 @@ public class User {
         }
         myDao.delete(this);
     }
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
-    @Generated(hash = 72181573)
-    public synchronized void resetOwnedBooks() {
-        ownedBooks = null;
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1118843534)
+    public void setBook(Book book) {
+        synchronized (this) {
+            this.book = book;
+            bookId = book == null ? null : book.getB_id();
+            book__resolvedKey = bookId;
+        }
     }
-    /**
-     * To-many relationship, resolved on first access (and after reset).
-     * Changes to to-many relations are not persisted, make changes to the target entity.
-     */
-    @Generated(hash = 1432356918)
-    public List<Book> getOwnedBooks() {
-        if (ownedBooks == null) {
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 577500745)
+    public Book getBook() {
+        Long __key = this.bookId;
+        if (book__resolvedKey == null || !book__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             BookDao targetDao = daoSession.getBookDao();
-            List<Book> ownedBooksNew = targetDao._queryUser_OwnedBooks(bookName);
+            Book bookNew = targetDao.load(__key);
             synchronized (this) {
-                if(ownedBooks == null) {
-                    ownedBooks = ownedBooksNew;
-                }
+                book = bookNew;
+                book__resolvedKey = __key;
             }
         }
-        return ownedBooks;
+        return book;
     }
+    @Generated(hash = 893611298)
+    private transient Long book__resolvedKey;
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 2059241980)
     public void __setDaoSession(DaoSession daoSession) {
@@ -103,11 +105,11 @@ public class User {
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-    public String getBookName() {
-        return this.bookName;
+    public Long getBookId() {
+        return this.bookId;
     }
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
     public int getHeight() {
         return this.height;
@@ -127,22 +129,22 @@ public class User {
     public void setName(String Name) {
         this.Name = Name;
     }
-    public Long getUser_id() {
-        return this.user_id;
+    public Long getU_id() {
+        return this.u_id;
     }
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setU_id(Long u_id) {
+        this.u_id = u_id;
     }
-    @Generated(hash = 293634540)
-    public User(Long user_id, @NotNull String Name, int age, int height,
-            String bookName) {
-        this.user_id = user_id;
+    @Generated(hash = 2031286636)
+    public User(Long u_id, @NotNull String Name, int age, int height, Long bookId) {
+        this.u_id = u_id;
         this.Name = Name;
         this.age = age;
         this.height = height;
-        this.bookName = bookName;
+        this.bookId = bookId;
     }
     @Generated(hash = 586692638)
     public User() {
     }
+
 }
