@@ -1,25 +1,26 @@
 package com.ssdy.mytextview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 import com.ssdy.Bean.Book;
 import com.ssdy.Bean.User;
 import com.ssdy.greendao.BookDao;
 import com.ssdy.greendao.DaoSession;
 import com.ssdy.greendao.UserDao;
 
+import java.util.List;
+
 
 public class MainActivity extends BaseActivty<MessageEvent> {
 
-    private Button bt1;
+    private Button bt1,bt2;
     private UserDao _UserDao;
     private BookDao _BookDao;
-    ImageView iv;
     private int a=1;
 
 
@@ -33,19 +34,27 @@ public class MainActivity extends BaseActivty<MessageEvent> {
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, Main2Activity.class));
-                //User _User = new User(null,"name"+a,16+a,168+a,12L+Long.valueOf(a));
-//                _UserDao.insert(_User);
-                //_UserDao.save(_User);
-                //Book _Book = new Book(null,"bookname"+a,null);
-                //_BookDao.insert(_Book);
-                //a++;
-                Book _SeBook = _UserDao.queryBuilder().where(UserDao.Properties.U_id.eq(4L)).build().unique().getBook();
-                Toast.makeText(MainActivity.this, _SeBook.getBook(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+//                User _User = new User(null,"name"+a,16+a,168+a,12L+Long.valueOf(a));
+////                _UserDao.insert(_User);
+//                _UserDao.save(_User);
+//                Book _Book = new Book(Long.valueOf(a),"bookname"+a,Long.valueOf(a+1));
+////                _BookDao.insert(_Book);
+//                _BookDao.save(_Book);
+//                a++;
             }
         });
-        iv = (ImageView) findViewById(R.id.ima);
-        Picasso.with(MyApplication.getContext()).load("http://172.16.2.124:8080/english/rest/show/listenrecord").into(iv);
+        bt2 = (Button)findViewById(R.id.relation);
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //关联查询
+                Book _SeBook = _UserDao.queryBuilder().where(UserDao.Properties.U_id.eq(4L)).build().unique().getBook();
+                Toast.makeText(MainActivity.this, _SeBook.getBook(), Toast.LENGTH_SHORT).show();
+                User _SeUser=_BookDao.queryBuilder().where(BookDao.Properties.B_id.eq(4L)).build().unique().getUser();
+                Toast.makeText(MainActivity.this, _SeUser.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -61,18 +70,21 @@ public class MainActivity extends BaseActivty<MessageEvent> {
 //            _BookDao.insert(_Book);
 //        }
         //查询数据
-//        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("OK")).build().unique();
-        //unique()表示查询结果为一条数据，若数据不存在，_SelectUser为null。
-//        if (_SelectUser!=null) {
-//            Log.d("GreenDao", _SelectUser.getU_id() + "");
-//        }
+        User _SelectUser = _UserDao.queryBuilder().where(UserDao.Properties.Name.eq("name")).build().unique();
+        //unique()表示查询结果为一条数据，若超过一条，咋出异常；若数据不存在，_SelectUser为null。
+        if (_SelectUser!=null) {
+            Log.d("GreenDao", _SelectUser.getU_id() + "");
+        }
+
         //获取多个结果
-//        List<User> _Users = _UserDao.queryBuilder()
-//                .where(UserDao.Properties.U_id.notEq(10)) //查询条件
-//                .orderAsc(UserDao.Properties.U_id) //按首字母排列
-//                .limit(10)  //限制查询结果个数
-//                .build().list(); //结果放进list中
-//        Log.d("GreenDao", _Users.size() + "");
+        List<User> _Users = _UserDao.queryBuilder()
+                .where(UserDao.Properties.U_id.notIn(2,5,9))//.notEq(5)) //查询条件
+                .orderAsc(UserDao.Properties.U_id) //按首字母排列
+                .limit(100)  //限制查询结果个数
+                .build().list(); //结果放进list中
+        for(User _singleU:_Users) {
+            Log.d("GreenDao", _singleU.getAge() + "");
+        }
 
     }
 
