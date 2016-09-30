@@ -34,12 +34,13 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.1.0'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.1.1'
     }
 }
 
 apply plugin: 'org.greenrobot.greendao'
 
+//GreenDao生成文件包名和路径
 greendao {
     schemaVersion 1
     daoPackage 'com.ssdy.greendao'
