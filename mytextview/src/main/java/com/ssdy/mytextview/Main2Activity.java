@@ -8,10 +8,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.ssdy.Bean.Site;
+import com.ssdy.Bean.User;
+import com.ssdy.greendao.DaoSession;
+import com.ssdy.greendao.SiteDao;
+import com.ssdy.greendao.UserDao;
+
 public class Main2Activity extends AppCompatActivity {
 
     private Button bt2,bt3;
     private EditText et1;
+    private UserDao _UserDao;
+    private SiteDao _SiteDao;
+    static int a=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +32,22 @@ public class Main2Activity extends AppCompatActivity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String str = et1.getText().toString();
-                if (str == null || str.equals("")) {
-                    Toast.makeText(Main2Activity.this, "editText is null", Toast.LENGTH_SHORT).show();
-                } else {
-//                    EventBus.getDefault().post(new MessageEvent(str));
-                    EventBusUtil.postEvent(new MessageEvent(str));
-                    Main2Activity.this.finish();
-                }
+                DaoSession _daoSession = ((MyApplication) getApplication()).getDaoSession();
+                _UserDao = _daoSession.getUserDao();
+                _SiteDao = _daoSession.getSiteDao();
+                User _User = new User(null,"name"+a,16+a,168+a,null);
+                _UserDao.save(_User);
+                Site site = new Site(null,1L);
+                _SiteDao.save(site);
+                a++;
+//                String str = et1.getText().toString();
+//                if (str == null || str.equals("")) {
+//                    Toast.makeText(Main2Activity.this, "editText is null", Toast.LENGTH_SHORT).show();
+//                } else {
+////                    EventBus.getDefault().post(new MessageEvent(str));
+//                    EventBusUtil.postEvent(new MessageEvent(str));
+//                    Main2Activity.this.finish();
+//                }
             }
         });
 
