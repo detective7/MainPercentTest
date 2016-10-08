@@ -1,13 +1,18 @@
 package com.ssdy.greendao;
 
+import java.util.List;
+import java.util.ArrayList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteStatement;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.Property;
+import org.greenrobot.greendao.internal.SqlUtils;
 import org.greenrobot.greendao.internal.DaoConfig;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.database.DatabaseStatement;
+
+import com.ssdy.Bean.Book;
 
 import com.ssdy.Bean.User;
 
@@ -22,14 +27,14 @@ public class UserDao extends AbstractDao<User, Long> {
     /**
      * Properties of entity User.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
-        public final static Property User_id = new Property(0, Long.class, "user_id", true, "_id");
+        public final static Property U_id = new Property(0, Long.class, "u_id", true, "_id");
         public final static Property Name = new Property(1, String.class, "Name", false, "NAME");
         public final static Property Age = new Property(2, int.class, "age", false, "AGE");
         public final static Property Height = new Property(3, int.class, "height", false, "HEIGHT");
-        public final static Property BookName = new Property(4, String.class, "bookName", false, "BOOK_NAME");
-    };
+        public final static Property BookId = new Property(4, Long.class, "bookId", false, "BOOK_ID");
+    }
 
     private DaoSession daoSession;
 
@@ -47,11 +52,11 @@ public class UserDao extends AbstractDao<User, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: user_id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: u_id
                 "\"NAME\" TEXT NOT NULL ," + // 1: Name
                 "\"AGE\" INTEGER NOT NULL ," + // 2: age
                 "\"HEIGHT\" INTEGER NOT NULL ," + // 3: height
-                "\"BOOK_NAME\" TEXT);"); // 4: bookName
+                "\"BOOK_ID\" INTEGER);"); // 4: bookId
     }
 
     /** Drops the underlying database table. */
@@ -64,17 +69,17 @@ public class UserDao extends AbstractDao<User, Long> {
     protected final void bindValues(DatabaseStatement stmt, User entity) {
         stmt.clearBindings();
  
-        Long user_id = entity.getUser_id();
-        if (user_id != null) {
-            stmt.bindLong(1, user_id);
+        Long u_id = entity.getU_id();
+        if (u_id != null) {
+            stmt.bindLong(1, u_id);
         }
         stmt.bindString(2, entity.getName());
         stmt.bindLong(3, entity.getAge());
         stmt.bindLong(4, entity.getHeight());
  
-        String bookName = entity.getBookName();
-        if (bookName != null) {
-            stmt.bindString(5, bookName);
+        Long bookId = entity.getBookId();
+        if (bookId != null) {
+            stmt.bindLong(5, bookId);
         }
     }
 
@@ -82,17 +87,17 @@ public class UserDao extends AbstractDao<User, Long> {
     protected final void bindValues(SQLiteStatement stmt, User entity) {
         stmt.clearBindings();
  
-        Long user_id = entity.getUser_id();
-        if (user_id != null) {
-            stmt.bindLong(1, user_id);
+        Long u_id = entity.getU_id();
+        if (u_id != null) {
+            stmt.bindLong(1, u_id);
         }
         stmt.bindString(2, entity.getName());
         stmt.bindLong(3, entity.getAge());
         stmt.bindLong(4, entity.getHeight());
  
-        String bookName = entity.getBookName();
-        if (bookName != null) {
-            stmt.bindString(5, bookName);
+        Long bookId = entity.getBookId();
+        if (bookId != null) {
+            stmt.bindLong(5, bookId);
         }
     }
 
@@ -110,37 +115,42 @@ public class UserDao extends AbstractDao<User, Long> {
     @Override
     public User readEntity(Cursor cursor, int offset) {
         User entity = new User( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // user_id
+            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // u_id
             cursor.getString(offset + 1), // Name
             cursor.getInt(offset + 2), // age
             cursor.getInt(offset + 3), // height
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // bookName
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // bookId
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, User entity, int offset) {
-        entity.setUser_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setU_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setName(cursor.getString(offset + 1));
         entity.setAge(cursor.getInt(offset + 2));
         entity.setHeight(cursor.getInt(offset + 3));
-        entity.setBookName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setBookId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override
     protected final Long updateKeyAfterInsert(User entity, long rowId) {
-        entity.setUser_id(rowId);
+        entity.setU_id(rowId);
         return rowId;
     }
     
     @Override
     public Long getKey(User entity) {
         if(entity != null) {
-            return entity.getUser_id();
+            return entity.getU_id();
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(User entity) {
+        return entity.getU_id() != null;
     }
 
     @Override
@@ -148,4 +158,95 @@ public class UserDao extends AbstractDao<User, Long> {
         return true;
     }
     
+    private String selectDeep;
+
+    protected String getSelectDeep() {
+        if (selectDeep == null) {
+            StringBuilder builder = new StringBuilder("SELECT ");
+            SqlUtils.appendColumns(builder, "T", getAllColumns());
+            builder.append(',');
+            SqlUtils.appendColumns(builder, "T0", daoSession.getBookDao().getAllColumns());
+            builder.append(" FROM USER T");
+            builder.append(" LEFT JOIN BOOK T0 ON T.\"BOOK_ID\"=T0.\"_id\"");
+            builder.append(' ');
+            selectDeep = builder.toString();
+        }
+        return selectDeep;
+    }
+    
+    protected User loadCurrentDeep(Cursor cursor, boolean lock) {
+        User entity = loadCurrent(cursor, 0, lock);
+        int offset = getAllColumns().length;
+
+        Book book = loadCurrentOther(daoSession.getBookDao(), cursor, offset);
+        entity.setBook(book);
+
+        return entity;    
+    }
+
+    public User loadDeep(Long key) {
+        assertSinglePk();
+        if (key == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder(getSelectDeep());
+        builder.append("WHERE ");
+        SqlUtils.appendColumnsEqValue(builder, "T", getPkColumns());
+        String sql = builder.toString();
+        
+        String[] keyArray = new String[] { key.toString() };
+        Cursor cursor = db.rawQuery(sql, keyArray);
+        
+        try {
+            boolean available = cursor.moveToFirst();
+            if (!available) {
+                return null;
+            } else if (!cursor.isLast()) {
+                throw new IllegalStateException("Expected unique result, but count was " + cursor.getCount());
+            }
+            return loadCurrentDeep(cursor, true);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+    /** Reads all available rows from the given cursor and returns a list of new ImageTO objects. */
+    public List<User> loadAllDeepFromCursor(Cursor cursor) {
+        int count = cursor.getCount();
+        List<User> list = new ArrayList<User>(count);
+        
+        if (cursor.moveToFirst()) {
+            if (identityScope != null) {
+                identityScope.lock();
+                identityScope.reserveRoom(count);
+            }
+            try {
+                do {
+                    list.add(loadCurrentDeep(cursor, false));
+                } while (cursor.moveToNext());
+            } finally {
+                if (identityScope != null) {
+                    identityScope.unlock();
+                }
+            }
+        }
+        return list;
+    }
+    
+    protected List<User> loadDeepAllAndCloseCursor(Cursor cursor) {
+        try {
+            return loadAllDeepFromCursor(cursor);
+        } finally {
+            cursor.close();
+        }
+    }
+    
+
+    /** A raw-style query where you can pass any WHERE clause and arguments. */
+    public List<User> queryDeep(String where, String... selectionArg) {
+        Cursor cursor = db.rawQuery(getSelectDeep() + where, selectionArg);
+        return loadDeepAllAndCloseCursor(cursor);
+    }
+ 
 }

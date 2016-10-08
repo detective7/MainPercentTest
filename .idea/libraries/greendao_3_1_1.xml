@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="greendao-3.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.greenrobot/greendao/3.1.1/549de9d8793d3c713690fcb3f5561955c94ea3a0/greendao-3.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.greenrobot/greendao/3.1.1/a0164324ff506561f05ebfc03d05853be99a6781/greendao-3.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
