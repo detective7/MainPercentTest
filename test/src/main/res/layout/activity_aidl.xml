@@ -10,4 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.test.AidlActivity">
 
+    <Button
+        android:text="启动服务"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="54dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="46dp"
+        android:id="@+id/btn_bind_service" />
+
+    <Button
+        android:text="加法计算"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_bind_service"
+        android:layout_toRightOf="@+id/btn_bind_service"
+        android:layout_toEndOf="@+id/btn_bind_service"
+        android:layout_marginLeft="59dp"
+        android:layout_marginStart="59dp"
+        android:id="@+id/btn_add_method" />
 </RelativeLayout>
